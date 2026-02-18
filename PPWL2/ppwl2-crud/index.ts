@@ -11,7 +11,7 @@ async function addNote(content: string) {
     const existingContent = (await file.exists()) ? await file.text() : "";
 
     // Tambahkan catatan baru (dengan timestamp agar lebih keren)
-    const timestamp = new Date().toLocaleString();
+    const timestamp = new Date().toISOString();
     const formattedNote = `[${timestamp}] ${content}\n`;
 
     // Simpan kembali
@@ -85,6 +85,30 @@ async function deleteNote(lineNumber: number) {
   }
 }
 
+// 5. Fungsi untuk mencari catatan berdasarkan keyword
+async function searchNotes(keyword: string) {
+  const file = Bun.file(FILE_NAME);
+
+  if (!(await file.exists())) {
+    console.log("📭 Belum ada catatan untuk dicari.");
+    return;
+  }
+
+  const content = await file.text();
+  const lines = content.trim().split("\n").filter(Boolean);
+
+  const results = lines.filter((line) => line.toLowerCase().includes(keyword.toLowerCase()));
+
+  if (results.length === 0) {
+    console.log(`🔎 Tidak ditemukan catatan dengan kata: "${keyword}"`);
+  } else {
+    console.log(`\n🔎 Hasil pencarian untuk "${keyword}":`);
+    results.forEach((line, index) => {
+      console.log(`${index + 1}. ${line}`);
+    });
+  }
+}
+
 // Ambil input dari terminal: bun run index.ts "isi catatan"
 const command = Bun.argv[2];
 const value = Bun.argv[3];
@@ -116,6 +140,12 @@ if (command === "list" || command === "view") {
       await readNotes();
     }
   }
+} else if (command === "search") {
+  if (value) {
+    await searchNotes(value);
+  } else {
+    console.log('⚠️ Contoh penggunaan: bun run index.ts search "kata"');
+  }
 } else if (command) {
   await addNote(command);
   await readNotes();
@@ -123,6 +153,7 @@ if (command === "list" || command === "view") {
   console.log("💡 Tips:");
   console.log("   Lihat Semua : bun run index.ts list");
   console.log('   Tambah      : bun run index.ts "isi catatan"');
-  console.log(`   Edit : bun run index.ts update[nomor] "isi baru"`);
+  console.log(`   Edit : bun run index.ts update [nomor] "isi baru"`);
   console.log("   Hapus       : bun run index.ts delete [nomor]");
+  console.log("   Search      : bun run index.ts search 'yang mau dicari'");
 }
