@@ -1,4 +1,4 @@
-# ppwl3
+# PPWL3
 
 # Praktikum 2 - Perbedaan Tailwind CSS v3 dan v4 (Tailwind Play)
 
