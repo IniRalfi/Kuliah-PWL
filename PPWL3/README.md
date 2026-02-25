@@ -67,3 +67,13 @@ Jika sebuah elemen diberi warna latar belakang menggunakan class Tailwind CSS se
 
 Warna latar belakang tidak mempengaruhi **border**, **margin**, maupun **outline**.  
 Background hanya mengisi area konten dan padding di dalam elemen.
+
+# Praktikum 7 – Dark Mode Tailwind CSS
+
+Dark mode diaktifkan menggunakan class `dark` pada tag `<html>` serta utility `dark:` dari Tailwind CSS.
+
+Jika class `dark` tidak digunakan, dark mode dapat diuji melalui Chrome DevTools:
+DevTools → Rendering → Emulated CSS media → prefers-color-scheme: dark.
+
+Screenshot hasil pengujian dark mode:
+https://drive.google.com/file/d/1ccFLwmteU4wJufGXuYz3HVLHTwUeUHju/view?usp=drive_link
