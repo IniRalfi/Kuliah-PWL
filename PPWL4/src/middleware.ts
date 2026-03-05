@@ -1,5 +1,5 @@
 // Middleware.ts
-import { Elysia } from "elysia";
+import { Elysia, t } from "elysia";
 import { openapi } from "@elysiajs/openapi";
 
 const app = new Elysia().use(openapi());
@@ -57,6 +57,7 @@ app.get(
   },
 );
 
+// PRAKTIKUM 6 - afterHandler
 // afterHandler
 app.onAfterHandle(({ response }) => {
   return {
@@ -66,15 +67,38 @@ app.onAfterHandle(({ response }) => {
   };
 });
 
-app.get("/profile", () => ({
-  name: "Nama kamu Rafli",
-}));
-
-// PRAKTIKUM 6 - afterHandle
 app.get("/product", () => ({
   id: 1,
   name: "Laptop",
 }));
+
+// PRAKTIKUM 7 - Custom Validation Error
+app.post("/login", ({ body }) => body, {
+  body: t.Object({
+    email: t.String({ format: "email" }),
+    password: t.String({ minLength: 8 }),
+  }),
+});
+
+app.onError(({ code, error, set }) => {
+  if (code === "VALIDATION") {
+    set.status = 400;
+    return {
+      success: false,
+      error: "Validation Error", // ← sesuaikan format
+    };
+  }
+  if (code === "NOT_FOUND") {
+    set.status = 404;
+    return {
+      message: "Route not found",
+    };
+  }
+  set.status = 500;
+  return {
+    message: "Internal Server Error",
+  };
+});
 
 app.listen(3000);
 console.log("Server running at http://localhost:3000");
