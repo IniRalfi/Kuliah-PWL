@@ -28,19 +28,6 @@ const app = new Elysia()
       id: t.Number(),
     }),
   })
-  // Contoh Params
-  .get("/user/:id", ({ params }) => params, {
-    params: t.Object({
-      id: t.Number(),
-    }),
-  })
-  // Contoh Query
-  .get("/search", ({ query }) => query, {
-    query: t.Object({
-      keyword: t.String(),
-      page: t.Optional(t.Number()),
-    }),
-  })
 
   // PRAKTIKUM 2 - VALIDASI PARAMS & QUERY
   .get("/products/:id", ({ query, params }) => ({ query, params }), {
