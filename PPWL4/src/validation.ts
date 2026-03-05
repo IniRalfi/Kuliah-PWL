@@ -34,6 +34,7 @@ const app = new Elysia()
       id: t.Number(),
     }),
   })
+  // Contoh Query
   .get("/search", ({ query }) => query, {
     query: t.Object({
       keyword: t.String(),
@@ -41,6 +42,32 @@ const app = new Elysia()
     }),
   })
 
+  // PRAKTIKUM 2 - VALIDASI PARAMS & QUERY
+  .get("/products/:id", ({ query, params }) => ({ query, params }), {
+    params: t.Object({
+      id: t.Number(),
+    }),
+    query: t.Object({
+      sort: t.Union([t.Literal("asc"), t.Literal("desc")]),
+    }),
+  })
+
+  // Validasi Response
+  .get(
+    "/ping",
+    () => {
+      return {
+        success: true,
+        message: "Server OK",
+      };
+    },
+    {
+      response: t.Object({
+        success: t.Boolean(),
+        message: t.String(),
+      }),
+    },
+  )
   .listen(3000);
 
 console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);
