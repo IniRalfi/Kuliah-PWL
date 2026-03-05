@@ -38,5 +38,43 @@ app.get(
   },
 );
 
+// PRAKTIKUM 5 - beforeHandle
+app.get(
+  "/admin",
+  () => ({
+    stats: 99,
+  }),
+  {
+    beforeHandle({ headers, set }) {
+      if (headers.authorization !== "Bearer 123") {
+        set.status = 401;
+        return {
+          success: false,
+          message: "Unauthorized",
+        };
+      }
+    },
+  },
+);
+
+// afterHandler
+app.onAfterHandle(({ response }) => {
+  return {
+    success: true,
+    message: "data tersedia",
+    data: response,
+  };
+});
+
+app.get("/profile", () => ({
+  name: "Nama kamu Rafli",
+}));
+
+// PRAKTIKUM 6 - afterHandle
+app.get("/product", () => ({
+  id: 1,
+  name: "Laptop",
+}));
+
 app.listen(3000);
 console.log("Server running at http://localhost:3000");
