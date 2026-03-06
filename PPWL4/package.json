@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@elysiajs/openapi": "^1.4.14",
-    "elysia": "latest"
+    "@tailwindcss/cli": "^4.2.1",
+    "elysia": "latest",
+    "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "bun-types": "latest"
