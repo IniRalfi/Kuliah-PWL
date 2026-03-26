@@ -6,3 +6,6 @@
 	path = PPWL6
 	url = git@github.com:IniRalfi/ppwl6-monorepo.git
 	branch = main
+[submodule "PPWL7"]
+	path = PPWL7
+	url = git@github.com:IniRalfi/ppwl7-mono3.git
