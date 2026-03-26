@@ -1,6 +1,8 @@
 [submodule "PPWL5"]
 	path = PPWL5
 	url = https://github.com/IniRalfi/ppwl5-project-structure.git
+	branch = main
 [submodule "PPWL6"]
 	path = PPWL6
 	url = git@github.com:IniRalfi/ppwl6-monorepo.git
+	branch = main
