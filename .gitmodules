@@ -9,3 +9,9 @@
 [submodule "PPWL7"]
 	path = PPWL7
 	url = git@github.com:IniRalfi/ppwl7-mono3.git
+[submodule "UTS"]
+	path = UTS
+	url = git@github.com:IniRalfi/ppwl8-mono4.git
+[submodule "PPWL9"]
+	path = PPWL9
+	url = git@github.com:IniRalfi/ppwl9-mono-docker
